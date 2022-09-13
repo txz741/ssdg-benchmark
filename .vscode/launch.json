@@ -1,0 +1,41 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "test batch_x_u",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--root",
+                "/home/ljw/datasets",
+                "--seed",
+                "5",
+                "--trainer",
+                "StyleMatch",
+                "--source-domains",
+                "art_painting",
+                "cartoon",
+                "photo",
+                "--target-domains",
+                "sketch",
+                "--dataset-config-file",
+                "configs/datasets/ssdg_pacs.yaml",
+                "--config-file",
+                "configs/trainers/StyleMatch/ssdg_pacs_v1.yaml",
+                "--output-dir",
+                "output_test_batch_x_u/ssdg_pacs/nlab_210/StyleMatch/resnet18/v1/sketch/seed5",
+                "MODEL.BACKBONE.NAME",
+                "resnet18",
+                "DATASET.NUM_LABELED",
+                "210",
+            ]
+        },
+        
+    ]
+}

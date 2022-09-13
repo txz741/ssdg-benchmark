@@ -2,7 +2,7 @@
 
 cd ../..
 
-DATA=~/kaiyang/data
+DATA=/home/ljw/datasets
 
 DATASET=$1
 NLAB=$2 # total number of labels
