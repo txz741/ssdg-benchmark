@@ -135,5 +135,5 @@ dmypy.json
 ._*
 
 # This project
-output/
+output*/
 weights/
