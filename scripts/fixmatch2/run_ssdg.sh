@@ -6,9 +6,8 @@ DATA=/home/ljw/datasets
 
 DATASET=$1
 NLAB=$2 # total number of labels
-CFG=$3 # v1, v2, v3, v4
-SETUP=$4
-CUDA=$5
+SETUP=$3
+CUDA=$4
 
 if [ ${DATASET} == ssdg_pacs ]; then
     # NLAB: 210 or 105
@@ -24,7 +23,7 @@ elif [ ${DATASET} == ssdg_officehome ]; then
     D4=real_world
 fi
 
-TRAINER=StyleMatch
+TRAINER=FixMatch2
 NET=resnet18
 
 for SEED in $(seq 1 5)
@@ -59,8 +58,8 @@ do
     --source-domains ${S1} ${S2} ${S3} \
     --target-domains ${T} \
     --dataset-config-file configs/datasets/${DATASET}.yaml \
-    --config-file configs/trainers/${TRAINER}/${DATASET}_${CFG}.yaml \
-    --output-dir output5/${DATASET}/nlab_${NLAB}/${TRAINER}/${NET}/${CFG}/${T}/seed${SEED} \
+    --config-file configs/trainers/${TRAINER}/${DATASET}.yaml \
+    --output-dir output8_1/${DATASET}/nlab_${NLAB}/${TRAINER}/${NET}/${T}/seed${SEED} \
     MODEL.BACKBONE.NAME ${NET} \
     DATASET.NUM_LABELED ${NLAB}
     

@@ -1,14 +1,13 @@
 #!/bin/bash
 
-cd ../..
+cd ..
 
 DATA=/home/ljw/datasets
 
 DATASET=$1
 NLAB=$2 # total number of labels
-CFG=$3 # v1, v2, v3, v4
-SETUP=$4
-CUDA=$5
+SETUP=$3
+CUDA=$4
 
 if [ ${DATASET} == ssdg_pacs ]; then
     # NLAB: 210 or 105
@@ -22,12 +21,18 @@ elif [ ${DATASET} == ssdg_officehome ]; then
     D2=clipart
     D3=product
     D4=real_world
+elif [ ${DATASET} == ssdg_digitsdg ]; then
+    # NLAB: 300 or 150
+    D1=mnist
+    D2=mnist_m
+    D3=svhn
+    D4=syn
 fi
 
-TRAINER=StyleMatch
-NET=resnet18
+TRAINER=FixMatch
+NET=cnn_digitsdg
 
-for SEED in $(seq 1 5)
+for SEED in $(seq 1 10)
 do
     
     if [ ${SETUP} == 1 ]; then
@@ -59,8 +64,8 @@ do
     --source-domains ${S1} ${S2} ${S3} \
     --target-domains ${T} \
     --dataset-config-file configs/datasets/${DATASET}.yaml \
-    --config-file configs/trainers/${TRAINER}/${DATASET}_${CFG}.yaml \
-    --output-dir output5/${DATASET}/nlab_${NLAB}/${TRAINER}/${NET}/${CFG}/${T}/seed${SEED} \
+    --config-file configs/trainers/fixmatch/${DATASET}.yaml \
+    --output-dir /home/ljw/DA_DG/ssdg-benchmark/output_work4/${DATASET}/nlab_${NLAB}/${TRAINER}/${NET}/${T}/seed${SEED} \
     MODEL.BACKBONE.NAME ${NET} \
     DATASET.NUM_LABELED ${NLAB}
     

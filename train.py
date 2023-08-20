@@ -12,10 +12,11 @@ import copy
 # datasets
 import datasets.ssdg_pacs
 import datasets.ssdg_officehome
+import datasets.ssdg_digitsdg
 
 # trainers
 import trainers.stylematch
-
+import trainers.fixmatch2
 
 def print_args(args, cfg):
     print("***************")
@@ -81,6 +82,11 @@ def extend_cfg(cfg):
 def setup_cfg(args):
     cfg = get_cfg_default()
     extend_cfg(cfg)
+    cfg.TRAINER.FIXMATCH2 = CN()
+    cfg.TRAINER.FIXMATCH2.WEIGHT_U = 1.0
+    cfg.TRAINER.FIXMATCH2.CONF_THRE = 0.95
+    cfg.TRAINER.FIXMATCH2.STRONG_TRANSFORMS = ()
+    cfg.TRAINER.FIXMATCH2.C_OPTIM = copy.deepcopy(cfg.OPTIM)
 
     # 1. From the dataset config file
     if args.dataset_config_file:
