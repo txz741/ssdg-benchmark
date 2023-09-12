@@ -29,10 +29,10 @@ elif [ ${DATASET} == ssdg_digitsdg ]; then
     D4=syn
 fi
 
-TRAINER=FixMatch
+TRAINER=StyleMatch
 NET=cnn_digitsdg
 
-for SEED in $(seq 1 10)
+for SEED in $(seq 1 5)
 do
     
     if [ ${SETUP} == 1 ]; then
@@ -64,8 +64,8 @@ do
     --source-domains ${S1} ${S2} ${S3} \
     --target-domains ${T} \
     --dataset-config-file configs/datasets/${DATASET}.yaml \
-    --config-file configs/trainers/fixmatch/${DATASET}.yaml \
-    --output-dir /home/ljw/DA_DG/ssdg-benchmark/output_work4/${DATASET}/nlab_${NLAB}/${TRAINER}/${NET}/${T}/seed${SEED} \
+    --config-file configs/trainers/StyleMatch/${DATASET}.yaml \
+    --output-dir /home/ljw/DA_DG/ssdg-benchmark/output_work4_2/${DATASET}/nlab_${NLAB}/${TRAINER}/${NET}/${T}/seed${SEED} \
     MODEL.BACKBONE.NAME ${NET} \
     DATASET.NUM_LABELED ${NLAB}
     

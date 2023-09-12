@@ -1,15 +1,14 @@
 import re
 import os
-def table_generate(root='/home/ljw/DA_DG/ssdg-benchmark/output_work4/ssdg_digitsdg/nlab_300/MeanTeacher/cnn_digitsdg'):
-    domains = os.listdir(root)
-    domains.sort()
+def table_generate(root='/home/ljw/DA_DG/ssdg-benchmark/output_work4_2/ssdg_digitsdg/nlab_150/StyleMatch/cnn_digitsdg'):
+    domains = sorted(os.listdir(root))
     data = ''
-    for i in range(1, 11):
+    for i in range(1, 6):
         # data = ''
         for d in domains:
             file = sorted(os.listdir(os.path.join(root, d, 'seed' + str(i))))
-            print(file)
-            file = file[0]
+            # print(file)
+            file = file[2]
             f = open(os.path.join(root, d, 'seed' + str(i), file), 'rb')
             content = f.read()
             result_list = re.findall('accuracy: \d*\.\d*', content.decode('utf-8'))

@@ -374,7 +374,8 @@ class StyleMatch(TrainerXU):
             self.test()
 
         # Save model
-        self.save_model(self.epoch, self.output_dir)
+        if self.epoch >= 49:
+            self.save_model(self.epoch, self.output_dir)
 
         # Show elapsed time
         elapsed = round(time.time() - self.time_start)
